@@ -1,0 +1,56 @@
+#!/usr/bin/env bash
+
+HERE=$(cd "$(dirname "${BASH_SOURCE[0]}")" >/dev/null 2>&1 && pwd)
+
+pushd "${HERE}" >/dev/null || exit 1
+
+PARENT_COMMAND=$(ps $PPID | tail -n 1 | awk "{print \$5}")
+echo "*** wizwtr caller: ${PARENT_COMMAND}"
+
+# shellcheck disable=SC1091
+source ./src/include.sh
+
+# check commandline parameters
+for i in "$@"; do
+    echo "*** wizwtr option: ${i}"
+    case $i in
+    -i | --install)
+        install_wizwtr "${HERE}"
+        ;;
+    -u | --uninstall)
+        unstall_wizwtr
+        ;;
+    -s | --stop)
+        stop_wizwtr
+        ;;
+    -g | --go)
+        start_wizwtr "${HERE}" "-nograph"
+        ;;
+    -b | --boot)
+        boot_wizwtr
+        ;;
+    -r | --restart)
+        restart_wizwtr "${HERE}" 0
+        ;;
+    --systemd )
+        restart_wizwtr "${HERE}" 1
+        ;;
+    --graph)
+        graph_wizwtr "${HERE}"
+        ;;
+    --update)
+        update_wizwtr
+        ;;
+    *)
+        # unknown option
+        echo "** Unknown option **"
+        echo
+        echo "Syntax:"
+        echo "wizwtr [-i|--install] [-g|--go] [-r|--restart|--graph]  [-s|--stop] [-u|--uninstall]"
+        echo
+        exit 1
+        ;;
+    esac
+done
+
+popd >/dev/null || exit 1
