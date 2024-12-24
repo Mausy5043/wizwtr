@@ -1,0 +1,12 @@
+# https://docs.github.com/github/administering-a-repository/configuration-options-for-dependency-updates
+
+version: 2
+updates:
+  - package-ecosystem: 'pip'
+    directory: '/'
+    target-branch: 'master'
+    schedule:
+      interval: 'weekly'
+    allow:
+      # Allow both direct and indirect updates for all packages
+      - dependency-type: 'all'

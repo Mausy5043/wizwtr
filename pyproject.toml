@@ -1,0 +1,96 @@
+# Project: wizwtr
+
+# when changing dependencies also consider `requirements.txt` and `environment.yml`
+
+[project]
+name = "wizwtr"
+version = "0.0.0"   # rolling release has no version
+description = "monitoring homewizard watermeter"
+dependencies = [
+    "gracefulkiller==0.4.7",
+    "python-homewizard-energy==7.0.0",
+    "zeroconf==0.136.2",
+    ]
+license = {file = "LICENSE"}
+authors = [
+  { name="Mausy5043" },
+  ]
+readme = "README.md"
+requires-python = ">=3.12"
+
+[tool.autopep8]
+max_line_length = 98
+in-place = true
+recursive = true
+aggressive = 2
+ignore = [
+    # whitespace before ':': is enforced by black
+    "E203"
+    ]
+
+[tool.bandit]
+skips = []
+
+[tool.black]
+line-length = 98
+target-version = ["py39", "py310", "py311", "py312", "py313"]
+
+[tool.isort]
+profile = "black"
+py_version="auto"
+
+[tool.flake8]
+max_line_length = 98
+ignore = [
+    # whitespace before ':': is enforced by black
+    "E203",
+    ]
+
+[tool.mypy]
+# ignore_errors = true
+strict = false
+warn_return_any = true
+warn_unused_configs = true
+warn_redundant_casts = true
+warn_unused_ignores = true
+strict_equality = true
+check_untyped_defs = true
+disallow_subclassing_any = true
+disallow_untyped_decorators = true
+disallow_untyped_calls = true
+no_implicit_reexport = true
+extra_checks = true
+
+[tool.pydocstyle]
+inherit = false
+convention = "google"
+match = ".*\\.py"
+add-ignore = "D"
+
+[tool.ruff]
+fix = true
+indent-width = 4
+line-length = 98
+output-format = "concise"
+include = ["pyproject.toml", "src/**/*.py"]
+
+[tool.ruff.format]
+indent-style = "space"
+line-ending = "auto"
+quote-style = "preserve"
+
+[tool.ruff.lint]
+select = ["B", "E", "F", "I", "SIM", "UP", "W"]
+ignore = [
+    # line too long: formatter is leading
+    "E501"
+    ]
+# Allow autofix for all enabled rules (when `--fix`) is provided.
+fixable = ["ALL"]
+unfixable = []
+
+# pylint is controlled by .pylintrc
+
+
+[tool.pyright]
+reportAttributeAccessIssue="none"

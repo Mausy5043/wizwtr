@@ -4,3 +4,20 @@ channels:
   - defaults
 dependencies:
   - python=3.12
+  - pip
+
+  # imported deps
+  
+  # Not on conda channels:
+  - pip:
+      - gracefulkiller==0.4.7
+      - python-homewizard-energy==7.0.0
+  - zeroconf=0.136.2
+
+  # dev deps
+  - jupyterlab
+  - libtiff
+#  - pandas-stubs
+  - pipdeptree
+  - pre-commit
+  - scipy
