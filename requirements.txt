@@ -2,3 +2,7 @@
 
 # pip can't install the dependencies from pyproject.toml
 # when changing this file also consider `pyproject.toml` and `environment.yml`
+
+gracefulkiller==0.4.7
+python-homewizard-energy==7.0.0
+zeroconf==0.136.2
