@@ -31,7 +31,7 @@ class WizWTR_v1:  # pylint: disable=too-many-instance-attributes
 
     def __init__(self, debug: bool = False) -> None:  # pylint: disable=too-many-instance-attributes
         # get a HomeWizard IP
-        _howip = zcd.get_ip(service="_hwenergy", filter="HWE-WTR")
+        _howip = zcd.get_ip(service="_hwenergy", filtr="HWE-WTR")
 
         if _howip:
             self.ip = _howip[0]
