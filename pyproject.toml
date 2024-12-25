@@ -7,9 +7,9 @@ name = "wizwtr"
 version = "0.0.0"   # rolling release has no version
 description = "monitoring homewizard watermeter"
 dependencies = [
-    "gracefulkiller==0.4.7",
-    "python-homewizard-energy==7.0.0",
-    "zeroconf==0.136.2",
+    "gracefulkiller~=0.4",
+    "python-homewizard-energy~=7.0",
+    "zeroconf~=0.136",
     ]
 license = {file = "LICENSE"}
 authors = [

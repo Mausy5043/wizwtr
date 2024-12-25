@@ -14,9 +14,9 @@ dependencies:
 
   # Not on conda channels:
   - pip:
-      - gracefulkiller==0.4.7
-      - python-homewizard-energy==7.0.0
-  - zeroconf=0.136.2
+      - gracefulkiller~=0.4
+      - python-homewizard-energy~=7.0
+  - zeroconf=0.136
 
   # dev deps
   - jupyterlab
