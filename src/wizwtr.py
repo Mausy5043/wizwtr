@@ -71,14 +71,14 @@ def main() -> None:
     API_wtr = wtr.WizWTR_v1(debug=DEBUG)
 
     sql_db = m3.SqlDatabase(
-        database=constants.WIZ_P1["database"],
-        table=constants.WIZ_P1["sql_table"],
-        insert=constants.WIZ_P1["sql_command"],
+        database=constants.WIZ_WTR["database"],
+        table=constants.WIZ_WTR["sql_table"],
+        insert=constants.WIZ_WTR["sql_command"],
         debug=DEBUG,
     )
 
-    report_interval = int(constants.WIZ_P1["report_interval"])
-    sample_interval = report_interval / int(constants.WIZ_P1["samplespercycle"])
+    report_interval = int(constants.WIZ_WTR["report_interval"])
+    sample_interval = report_interval / int(constants.WIZ_WTR["samplespercycle"])
 
     next_time = time.time()
     rprt_time = time.time() + (report_interval - (time.time() % report_interval))
