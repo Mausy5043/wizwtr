@@ -20,10 +20,10 @@ import syslog
 import time
 import traceback
 
-import constants
 import GracefulKiller as gk  # type: ignore[import-untyped]
 import mausy5043_common.libsqlite3 as m3
 
+import constants
 import libwizwtr as wtr
 
 logging.basicConfig(
