@@ -43,8 +43,14 @@ py_version="auto"
 [tool.flake8]
 max_line_length = 98
 ignore = [
+    # is too complex
+    "C901",
+    # closing bracket does not match indentation of opening bracket's line is enforced by black
+    "E123",
     # whitespace before ':': is enforced by black
     "E203",
+    # line too long is enforced by ruff
+    "E501",
     ]
 
 [tool.mypy]
