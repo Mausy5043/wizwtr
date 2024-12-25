@@ -144,7 +144,7 @@ unstall_wizwtr() {
     action_timers rm
     action_services rm
     rm "${APPROOT}/.${app_name}.branch"
-    sudo rm /var/www/state
+    sudo rm /var/www/water
 }
 
 # install the application
@@ -188,7 +188,7 @@ install_wizwtr() {
     action_services enable
 
     # install a link to the website on /tmp/....
-    sudo ln -s "${website_dir}" /var/www/state
+    sudo ln -s "${website_dir}" /var/www/water
 
     echo "Installation complete. To start the application use:"
     echo "   wizwtr --go"
