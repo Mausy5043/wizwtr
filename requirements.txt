@@ -4,5 +4,6 @@
 # when changing this file also consider `pyproject.toml` and `environment.yml`
 
 gracefulkiller~=0.4
+mausy5043-common==1.10.1
 python-homewizard-energy~=7.0
 zeroconf~=0.136
