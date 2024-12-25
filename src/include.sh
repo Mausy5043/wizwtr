@@ -41,8 +41,7 @@ declare -a wizwtr_apt_packages=("build-essential" "python3" "python3-dev" "pytho
     "libatlas-base-dev" "libxcb1" "libopenjp2-7" "libtiff5"
     "sqlite3")
 # placeholders for trendgraphs to make website work regardless of the state of the graphs.
-declare -a wizwtr_graphs=('lex_pastdays_mains.png'
-    'wtr_pastdays.png'
+declare -a wizwtr_graphs=('wtr_pastdays.png'
     'wtr_pasthours.png'
     'wtr_pastmonths'
     'wtr_pastyears.png')
@@ -85,7 +84,8 @@ update_wizwtr() {
     git fetch origin
     git checkout "${branch_name}"
     git reset --hard "origin/${branch_name}" && git clean -f -d
-    python -m pip install --upgrade pip -r "${APPDIR}/requirements.txt"
+    python -m pip install --upgrade pip -r "${APPDIR}/requirements.txt" \
+        |  grep -v "Requirement already satisfied"
 }
 
 # create graphs
