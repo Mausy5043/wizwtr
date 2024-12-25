@@ -88,21 +88,34 @@ class WizWTR_v1:  # pylint: disable=too-many-instance-attributes
             (dict): data converted to a dict.
         """
 
-        # telegram will look something like this:
+        # telegram will look something like this (we only use water data at the end):
         #
+        # Data(wifi_ssid='niflheim', wifi_strength=100, smr_version=None,
+        #      meter_model=None, unique_meter_id=None, active_tariff=None,
+        #      total_energy_import_kwh=None, total_energy_import_t1_kwh=None,
+        #      total_energy_import_t2_kwh=None, total_energy_import_t3_kwh=None,
+        #      total_energy_import_t4_kwh=None, total_energy_export_kwh=None,
+        #      total_energy_export_t1_kwh=None, total_energy_export_t2_kwh=None,
+        #      total_energy_export_t3_kwh=None, total_energy_export_t4_kwh=None,
+        #      active_power_w=None, active_power_l1_w=None, active_power_l2_w=None,
+        #      active_power_l3_w=None, active_voltage_v=None, active_voltage_l1_v=None,
+        #      active_voltage_l2_v=None, active_voltage_l3_v=None, active_current_a=None,
+        #      active_current_l1_a=None, active_current_l2_a=None, active_current_l3_a=None,
+        #      active_apparent_power_va=None, active_apparent_power_l1_va=None,
+        #      active_apparent_power_l2_va=None, active_apparent_power_l3_va=None,
+        #      active_reactive_power_var=None, active_reactive_power_l1_var=None,
+        #      active_reactive_power_l2_var=None, active_reactive_power_l3_var=None,
+        #      active_power_factor=None, active_power_factor_l1=None, active_power_factor_l2=None,
+        #      active_power_factor_l3=None, active_frequency_hz=None, voltage_sag_l1_count=None,
+        #      voltage_sag_l2_count=None, voltage_sag_l3_count=None, voltage_swell_l1_count=None,
+        #      voltage_swell_l2_count=None, voltage_swell_l3_count=None, any_power_fail_count=None,
+        #      long_power_fail_count=None, active_power_average_w=None, monthly_power_peak_w=None,
+        #      monthly_power_peak_timestamp=None, total_gas_m3=None, gas_timestamp=None,
+        #      gas_unique_id=None,
+        #      active_liter_lpm=0, total_liter_m3=0.016,
+        #      external_devices=None)
 
-        self.electra1in = int(telegram.total_energy_import_t1_kwh * 1000)
-        self.electra2in = int(telegram.total_energy_import_t2_kwh * 1000)
-        self.electra1out = int(telegram.total_energy_export_t1_kwh * 1000)
-        self.electra2out = int(telegram.total_energy_export_t2_kwh * 1000)
-        self.tarif = telegram.active_tariff
-        self.powerin = telegram.active_power_w
-        self.powerout = 0.0
-        self.swits = 1
-        if self.powerin < 0.0:
-            self.swits = 0
-            self.powerout = self.powerin
-            self.powerin = 0.0
+        self.water = int(telegram.total_liter_m3 * 1000)
 
         idx_dt: dt.datetime = dt.datetime.now()
         epoch = int(idx_dt.timestamp())
@@ -110,22 +123,15 @@ class WizWTR_v1:  # pylint: disable=too-many-instance-attributes
         return {
             "sample_time": idx_dt.strftime(self.dt_format),
             "sample_epoch": epoch,
-            "T1in": self.electra1in,
-            "T2in": self.electra2in,
-            "powerin": self.powerin,
-            "T1out": self.electra1out,
-            "T2out": self.electra2out,
-            "powerout": self.powerout,
-            "tarif": self.tarif,
-            "swits": self.swits,
+            "water": self.water,
         }
 
     def compact_data(self, data) -> tuple:
         """
-        Compact the ten-second data into 15-minute data
+        Compact the data into 15-minute data
 
         Args:
-            data (list): list of dicts containing 10-second data from the electricity meter
+            data (list): list of dicts containing data from the water meter
 
         Returns:
             (list): list of dicts containing compacted 15-minute data
