@@ -6,6 +6,7 @@
 
 
 import asyncio
+import json
 
 from homewizard_energy import HomeWizardEnergyV1
 
@@ -31,17 +32,13 @@ async def async_work():
         # Get device information, like firmware version
         wiz_dev = await api.device()
         print("\ndevice")
-        print(wiz_dev)
+        print(json.dumps(wiz_dev, indent=4))
 
         # Get measurements, like energy or water usage
         wiz_data = await api.data()
         print("\ndata")
-        print(wiz_data)
-        print(wiz_data.total_energy_import_kwh)
-
-        wiz_state = await api.state()
-        print("\nstate")
-        print(wiz_state)
+        print(json.dumps(wiz_data, indent=4))
+        print(wiz_data.total_liter_m3)
 
         wiz_system = await api.system()
         print("\nsystem")
