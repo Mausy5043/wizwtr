@@ -75,11 +75,11 @@ WIZ_WTR: dict = {
     "template": {
         "sample_time": "yyyy-mm-dd hh:mm:ss",
         "sample_epoch": 0,
-        "water": 0, # L
+        "water": 0,  # L
         },
-    "offset": (891.895 - 0.035), # m3
+    "offset": (891.895 - 0.035),  # m3
     "calibration": {
-        "2024-12-25 11:00:00": 0.000    # correction in m3
+        "2024-12-25 11:00:00": 0.000,  # correction in m3
         },
     }
 # fmt: on
