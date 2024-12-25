@@ -1,0 +1,14 @@
+# This service is for trending data from the past month(s)
+
+[Unit]
+Description=trending water data from past month (service)
+Wants=wizwtr.trend.month.timer
+
+[Service]
+Type=oneshot
+User=pi
+EnvironmentFile=/home/pi/.pyenvpaths
+ExecStart=/home/pi/wizwtr/bin/pastmonth.sh -
+
+# [Install]
+# WantedBy=multi-user.target

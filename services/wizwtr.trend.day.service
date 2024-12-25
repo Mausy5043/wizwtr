@@ -1,0 +1,14 @@
+# This service is for trending data from the past days
+
+[Unit]
+Description=trending water data from past days (service)
+Wants=wizwtr.trend.day.timer
+
+[Service]
+Type=oneshot
+User=pi
+EnvironmentFile=/home/pi/.pyenvpaths
+ExecStart=/home/pi/wizwtr/src/pastday.sh -
+
+# [Install]
+# WantedBy=multi-user.target

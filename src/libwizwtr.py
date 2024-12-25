@@ -37,14 +37,7 @@ class WizWTR_v1:  # pylint: disable=too-many-instance-attributes
             self.ip = _howip[0]
         self.dt_format = constants.DT_FORMAT  # "%Y-%m-%d %H:%M:%S"
         # starting values
-        self.electra1in = np.nan
-        self.electra2in = np.nan
-        self.electra1out = np.nan
-        self.electra2out = np.nan
-        self.powerin = np.nan
-        self.powerout = np.nan
-        self.tarif = 1
-        self.swits = 0
+        self.water = np.nan
         self.list_data: list = []
 
         self.debug: bool = debug
@@ -115,7 +108,7 @@ class WizWTR_v1:  # pylint: disable=too-many-instance-attributes
         #      active_liter_lpm=0, total_liter_m3=0.016,
         #      external_devices=None)
 
-        self.water = int(telegram.total_liter_m3 * 1000)
+        self.water = int(telegram.total_liter_m3 * 1000)    # in liters
 
         idx_dt: dt.datetime = dt.datetime.now()
         epoch = int(idx_dt.timestamp())

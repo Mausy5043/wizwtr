@@ -1,0 +1,11 @@
+# This timer is for triggering the trending of past days data
+
+[Unit]
+Description=regularly trending water data from past month (timer)
+
+[Timer]
+OnCalendar=*-*-* 05,15,23:56
+RandomizedDelaySec=10m
+
+[Install]
+WantedBy=timers.target
