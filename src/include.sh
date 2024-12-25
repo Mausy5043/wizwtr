@@ -32,7 +32,7 @@ declare -a wizwtr_timers=("wizwtr.trend.day.timer"
     "wizwtr.trend.year.timer")
   # "wizwtr.update.timer" (incl. the .service) is not installed
 # list of services provided
-declare -a wizwtr_services=("wizwtr.wizwtr.service")
+declare -a wizwtr_services=("wizwtr.service")
 # Install python3 and develop packages
 # Support for matplotlib & numpy needs to be installed seperately
 # Support for serial port
