@@ -8,7 +8,7 @@ Wants=wizwtr.trend.month.timer
 Type=oneshot
 User=pi
 EnvironmentFile=/home/pi/.pyenvpaths
-ExecStart=/home/pi/wizwtr/bin/pastmonth.sh -
+ExecStart=/home/pi/wizwtr/src/pastmonth.sh -
 
 # [Install]
 # WantedBy=multi-user.target

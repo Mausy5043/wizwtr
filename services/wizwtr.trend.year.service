@@ -8,7 +8,7 @@ Wants=wizwtr.trend.year.timer
 Type=oneshot
 User=pi
 EnvironmentFile=/home/pi/.pyenvpaths
-ExecStart=/home/pi/wizwtr/bin/pastyear.sh -
+ExecStart=/home/pi/wizwtr/src/pastyear.sh -
 
 # [Install]
 # WantedBy=multi-user.target
