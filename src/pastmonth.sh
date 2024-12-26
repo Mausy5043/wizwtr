@@ -9,13 +9,29 @@ pushd "${HERE}" >/dev/null || exit 1
 # shellcheck disable=SC1091
 source ./include.sh
 
+execute_sql() {
+    local sql=$2
+    local database=$1
+    for ((i=1; i<=max_retries; i++)); do
+        if sqlite3 "${database}" "${sql}"; then
+            echo "SQL executed successfully: ${sql}"
+            return 0
+        else
+            echo "Database is locked. Retry $i/$max_retries in $retry_delay seconds..."
+            sleep $retry_delay
+        fi
+    done
+    echo "Failed to execute SQL after $max_retries attempts: ${sql}"
+    return 1
+}
+
 if [ "${MAINTENANCE}" == "-" ]; then
     # do some maintenance
     CURRENT_EPOCH=$(date +'%s')
 
     # shellcheck disable=SC2154
     echo "${db_full_path} re-indexing... "
-    sqlite3 "${db_full_path}" "REINDEX;"
+    execute_sql "${db_full_path}" "REINDEX;"
 
     echo -n "${db_full_path} integrity check:   "
     chk_result=$(sqlite3 "${db_full_path}" "PRAGMA integrity_check;")
@@ -33,7 +49,7 @@ if [ "${MAINTENANCE}" == "-" ]; then
         # Keep upto 10 years of data
         echo "${db_full_path} vacuuming... "
         PURGE_EPOCH=$(echo "${CURRENT_EPOCH} - (3660 * 24 * 3600)" | bc)
-        sqlite3 "${db_full_path}" \
+        execute_sql "${db_full_path}" \
             "DELETE FROM mains WHERE sample_epoch < ${PURGE_EPOCH};"
     fi
     # sync the database into the cloud
