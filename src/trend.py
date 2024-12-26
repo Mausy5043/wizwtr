@@ -238,7 +238,7 @@ def main(opt) -> None:
     if opt.months:
         plot_graph(
             constants.TREND["month_graph"],
-            fetch_data(hours_to_fetch=opt.months * 31 * 24, aggregation="M"),
+            fetch_data(hours_to_fetch=opt.months * 31 * 24, aggregation="ME"),
             f" trend afgelopen maanden ({dt.now().strftime('%d-%m-%Y %H:%M:%S')})",
             show_data=False,
             locatorformat=["month", "%Y-%m"],
@@ -246,7 +246,7 @@ def main(opt) -> None:
     if opt.years:
         plot_graph(
             constants.TREND["year_graph"],
-            fetch_data(hours_to_fetch=opt.years * 366 * 24, aggregation="A"),
+            fetch_data(hours_to_fetch=opt.years * 366 * 24, aggregation="YE"),
             f" trend afgelopen jaren ({dt.now().strftime('%d-%m-%Y %H:%M:%S')})",
             show_data=True,
             locatorformat=["year", "%Y"],
