@@ -190,7 +190,7 @@ def plot_graph(
                 stacked=True,
                 width=0.9,
                 figsize=(fig_x, fig_y),
-                color=["blue", "red", "seagreen", "lightgreen", "salmon"],
+                color=["skyblue"],
             )
             # linewidth and alpha need to be set separately
             for _, a in enumerate(ax1.lines):
