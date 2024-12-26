@@ -46,8 +46,6 @@ if [ "${MAINTENANCE}" == "-" ]; then
     fi
 fi
 
-
-echo "no graphs available"
-# ./lg-trend.py --days 0
+./trend.py --days 0
 
 popd >/dev/null || exit

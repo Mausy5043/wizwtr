@@ -5,9 +5,5 @@
 HERE=$(cd "$(dirname "${BASH_SOURCE[0]}")" >/dev/null 2>&1 && pwd)
 
 pushd "${HERE}" >/dev/null || exit 1
-    echo "no graphs available"
-    # ./ms-trend.py --months 0 --years 0
-    # ./me-trend.py --months 0 --years 0
-    # ./trendyg.py --months 0 --gauge 0
-    # ./lg-trend.py --months 0 --years 0
+    ./trend.py --months 0 --years 0
 popd >/dev/null || exit
