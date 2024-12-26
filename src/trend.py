@@ -123,7 +123,8 @@ def fetch_data(hours_to_fetch=48, aggregation="W") -> dict:
     df = df.resample(f"{aggregation}").sum()
 
     # drop first row as it will usually not contain valid or complete data
-    df = df.iloc[1:, :]
+    if aggregation == "h":
+        df = df.iloc[1:, :]
 
     if DEBUG:
         print("o  database totaliser data pre-processed")
