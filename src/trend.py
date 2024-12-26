@@ -10,7 +10,9 @@ Using myenergi data
 
 # pylint: disable=C0413
 import argparse
+import random
 import sqlite3 as s3
+import time
 
 # import warnings
 from datetime import datetime as dt
@@ -95,14 +97,26 @@ def fetch_data(hours_to_fetch=48, aggregation="W") -> dict:
         print(s3_query)
 
     # Get the data
-    with s3.connect(DATABASE) as con:
-        df = pd.read_sql_query(
-            s3_query, con, parse_dates=["sample_time"], index_col="sample_epoch"
-        )
+    success = False
+    retries = 5
+    while not success and retries > 0:
+        try:
+            with s3.connect(DATABASE) as con:
+                df = pd.read_sql_query(
+                    s3_query, con, parse_dates=["sample_time"], index_col="sample_epoch"
+                )
+                success = True
+        except (s3.OperationalError, pd.errors.DatabaseError) as exc:
+            if DEBUG:
+                print("Database may be locked. Waiting...")
+            retries -= 1
+            time.sleep(random.randint(30, 60))
+            if retries == 0:
+                raise TimeoutError("Database seems locked.") from exc
 
     if DEBUG:
         print("o  database totaliser data")
-        print(df.to_markdown(floatfmt=".3f"))   # requires `tabulate` package
+        print(df.to_markdown(floatfmt=".3f"))  # requires `tabulate` package
 
     # Pre-processing
     # drop sample_time separately!
@@ -128,12 +142,12 @@ def fetch_data(hours_to_fetch=48, aggregation="W") -> dict:
 
     if DEBUG:
         print("o  database totaliser data pre-processed")
-        print(df.to_markdown(floatfmt=".3f"))   # requires `tabulate` package
+        print(df.to_markdown(floatfmt=".3f"))  # requires `tabulate` package
 
     df_wtr = df.sort_index(axis=1)
     if DEBUG:
         print("\n\n ** mains data for plotting  **")
-        print(df_wtr.to_markdown(floatfmt=".3f"))   # requires `tabulate` package
+        print(df_wtr.to_markdown(floatfmt=".3f"))  # requires `tabulate` package
 
     data_dict = {}
     data_dict["mains"] = df_wtr
