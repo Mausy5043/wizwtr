@@ -96,7 +96,6 @@ def fetch_data(hours_to_fetch=48, aggregation="W") -> dict:
     )
     if DEBUG:
         print(s3_query)
-
     # Get the data
     success = False
     retries = 5
