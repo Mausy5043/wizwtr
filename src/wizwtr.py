@@ -4,7 +4,7 @@
 # Copyright (C) 2024  Maurice (mausy5043) Hendrix
 # AGPL-3.0-or-later  - see LICENSE
 
-"""Daemon to periodically interogate the Home Wizard watermeter to fetch water usage data.
+"""Daemon to periodically interogate the HomeWizard watermeter to fetch water usage data.
 
 Store the data in a SQLite3 database.
 """
@@ -40,7 +40,7 @@ logging.basicConfig(
 LOGGER: logging.Logger = logging.getLogger(__name__)
 
 # fmt: off
-parser = argparse.ArgumentParser(description="Execute the home wizard P1 daemon.")
+parser = argparse.ArgumentParser(description="Execute the HomeWizard P1 daemon.")
 parser_group = parser.add_mutually_exclusive_group(required=True)
 parser_group.add_argument("--start",
                           action="store_true",

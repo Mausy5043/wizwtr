@@ -6,7 +6,7 @@
 
 # https://api-documentation.homewizard.com/docs/category/api-v1
 
-"""Common functions for use with the Home Wizard watermeter using the API/v1"""
+"""Common functions for use with the HomeWizard watermeter using the API/v1"""
 
 # import asyncio
 import datetime as dt
@@ -27,7 +27,7 @@ LOGGER: logging.Logger = logging.getLogger(__name__)
 
 
 class WizWTR_v1:  # pylint: disable=too-many-instance-attributes
-    """Class to interact with the Home Wizard watermeter."""
+    """Class to interact with the HomeWizard watermeter."""
 
     def __init__(self, debug: bool = False) -> None:  # pylint: disable=too-many-instance-attributes
         # get a HomeWizard IP
