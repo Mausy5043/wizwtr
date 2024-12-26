@@ -77,6 +77,7 @@ def fetch_data(hours_to_fetch=48, aggregation="W") -> dict:
     Returns:
         dict with dataframes containing mains and production data
     """
+    df = pd.DataFrame()
     if DEBUG:
         print(f"\nRequest {hours_to_fetch} hours of mains data")
         print("\n*** fetching mains data ***")
@@ -155,7 +156,11 @@ def fetch_data(hours_to_fetch=48, aggregation="W") -> dict:
 
 
 def plot_graph(
-    output_file, data_dict, plot_title, show_data: bool = False, locatorformat: list = []
+    output_file: str,
+    data_dict: dict,
+    plot_title: str,
+    show_data: bool = False,
+    locatorformat: list | None = None,
 ) -> None:
     """Plot the data in a chart.
 
