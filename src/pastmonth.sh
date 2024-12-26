@@ -7,10 +7,6 @@ HERE=$(cd "$(dirname "${BASH_SOURCE[0]}")" >/dev/null 2>&1 && pwd)
 max_retries=5
 retry_delay=32
 
-pushd "${HERE}" >/dev/null || exit 1
-# shellcheck disable=SC1091
-source ./include.sh
-
 execute_sql() {
     local sql=$2
     local database=$1
@@ -26,6 +22,10 @@ execute_sql() {
     echo "Failed to execute SQL after $max_retries attempts: ${sql}"
     return 1
 }
+
+pushd "${HERE}" >/dev/null || exit 1
+# shellcheck disable=SC1091
+source ./include.sh
 
 if [ "${MAINTENANCE}" == "-" ]; then
     # do some maintenance
