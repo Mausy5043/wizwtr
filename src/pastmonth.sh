@@ -4,6 +4,8 @@
 
 MAINTENANCE=${1}
 HERE=$(cd "$(dirname "${BASH_SOURCE[0]}")" >/dev/null 2>&1 && pwd)
+max_retries=5
+retry_delay=32
 
 pushd "${HERE}" >/dev/null || exit 1
 # shellcheck disable=SC1091
