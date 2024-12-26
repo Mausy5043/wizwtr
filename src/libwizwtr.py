@@ -75,7 +75,7 @@ class WizWTR_v1:  # pylint: disable=too-many-instance-attributes
     def _translate_telegram(self, telegram) -> dict:
         """Translate the telegram to a dict.
 
-        kW or kWh are converted to W resp. kW
+        cubic meters [m3] are converted to liters.
 
         Returns:
             (dict): data converted to a dict.
@@ -103,8 +103,8 @@ class WizWTR_v1:  # pylint: disable=too-many-instance-attributes
         #      voltage_sag_l2_count=None, voltage_sag_l3_count=None, voltage_swell_l1_count=None,
         #      voltage_swell_l2_count=None, voltage_swell_l3_count=None, any_power_fail_count=None,
         #      long_power_fail_count=None, active_power_average_w=None, monthly_power_peak_w=None,
-        #      monthly_power_peak_timestamp=None, total_gas_m3=None, gas_timestamp=None,
-        #      gas_unique_id=None,
+        #      monthly_power_peak_timestamp=None,
+        #      total_gas_m3=None, gas_timestamp=None, gas_unique_id=None,
         #      active_liter_lpm=0, total_liter_m3=0.016,
         #      external_devices=None)
 
