@@ -41,10 +41,10 @@ declare -a wizwtr_apt_packages=("build-essential" "python3" "python3-dev" "pytho
     "libatlas-base-dev" "libxcb1" "libopenjp2-7" "libtiff5"
     "sqlite3")
 # placeholders for trendgraphs to make website work regardless of the state of the graphs.
-declare -a wizwtr_graphs=('wtr_pastdays.png'
-    'wtr_pasthours.png'
-    'wtr_pastmonths'
-    'wtr_pastyears.png')
+declare -a wizwtr_graphs=('wtr_pastdays_mains.png'
+    'wtr_pasthours_mains.png'
+    'wtr_pastmonths_mains.png'
+    'wtr_pastyears_mains.png')
 
 # start the application
 start_wizwtr() {
