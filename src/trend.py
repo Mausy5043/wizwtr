@@ -115,7 +115,7 @@ def fetch_data(hours_to_fetch=48, aggregation="W") -> dict:
                 raise TimeoutError("Database seems locked.") from exc
 
     if DEBUG:
-        print("o  database totaliser data")
+        print("\no  database totaliser data")
         print(df.to_markdown(floatfmt=".3f"))  # requires `tabulate` package
 
     # Pre-processing
@@ -132,6 +132,9 @@ def fetch_data(hours_to_fetch=48, aggregation="W") -> dict:
 
     # Convert totalizers to first-order differences
     df = df.diff().dropna()
+    if DEBUG:
+        print("\no  database 1st order data")
+        print(df.to_markdown(floatfmt=".3f"))  # requires `tabulate` package
 
     # resample to monotonic timeline
     df = df.resample(f"{aggregation}").sum()
@@ -140,13 +143,10 @@ def fetch_data(hours_to_fetch=48, aggregation="W") -> dict:
     if aggregation == "h":
         df = df.iloc[1:, :]
 
-    if DEBUG:
-        print("o  database totaliser data pre-processed")
-        print(df.to_markdown(floatfmt=".3f"))  # requires `tabulate` package
-
     df_wtr = df.sort_index(axis=1)
     if DEBUG:
-        print("\n\n ** mains data for plotting  **")
+        print("\no  database totaliser data pre-processed")
+        print("   ** for plotting  **")
         print(df_wtr.to_markdown(floatfmt=".3f"))  # requires `tabulate` package
 
     data_dict = {}
