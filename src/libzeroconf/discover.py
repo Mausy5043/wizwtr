@@ -57,7 +57,7 @@ class MyListener(ServiceListener):
                 weight=0,
                 priority=0,
                 server='http-DABMAN i205 CDCCai6fu6g4c4ZZ.local.',
-                properties={b'path': b'/irdevice.xml,CUST_APP=0,BRAND=IMPERIAL,MAC=3475638B4984'},
+                properties={b'path': b'/irdevice.xml,CUST_APP=0,BRAND=IMPERIAL,MAC=____________'},
                 interface_index=None)
     ip = 192:168:2:149
 
@@ -95,7 +95,8 @@ class MyListener(ServiceListener):
             del DISCOVERED[__name]
 
     def update_service(self, zc: Zeroconf, type_: str, name: str) -> None:
-        """Overridden but not used."""
+        """Update information for services that send updates.
+        Overridden but not used."""
         _name = name.replace(" ", "_")
         __name = _name.split(".")[0]
         __type = type_.split(".")[0]
@@ -169,7 +170,16 @@ class MyListener(ServiceListener):
 
     @staticmethod
     def debyte(bytedict: Any) -> dict[str, str]:
-        """Transform a dict of bytes to a dict of strings"""
+        """
+        Transform a dictionary with byte keys and values to a dictionary with string keys and values.
+
+        Args:
+            bytedict (Any): A dictionary where both keys and values are bytes. It may also be empty or None.
+
+        Returns:
+            dict[str, str]: A dictionary where both keys and values are strings. If a value in the input dictionary is None,
+                            the corresponding value in the output dictionary will also be None. Empty keys are ignored.
+        """
         normdict = {}
         if bytedict:
             # bytedict may be empty or None
@@ -186,7 +196,15 @@ class MyListener(ServiceListener):
 
 
 def get_ip(service: str, filtr: str) -> list[str]:
-    """."""
+    """
+    Discover and retrieve IP addresses for a given service.
+    Args:
+        service (str): The name of the service to discover.
+        filtr (str): A filter string to match specific services.
+    Returns:
+        list[str]: A list of IP addresses that match the given service and filter.
+    """
+
     _ip = []
     _zc = Zeroconf()
     _ls = MyListener()

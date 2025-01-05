@@ -1,20 +1,17 @@
 #!/usr/bin/env python3
 
-# lektrix
-# Copyright (C) 2024  Maurice (mausy5043) Hendrix
+# wizwtr
+# Copyright (C) 2025  Maurice (mausy5043) Hendrix
 # AGPL-3.0-or-later  - see LICENSE
 
 """Create trendbargraphs of the data for various periods.
-Using myenergi data
+Using HomeWizard watermeter data
 """
 
-# pylint: disable=C0413
 import argparse
 import random
 import sqlite3 as s3
 import time
-
-# import warnings
 from datetime import datetime as dt
 
 import matplotlib.pyplot as plt
@@ -22,13 +19,6 @@ import matplotlib.ticker as mticker
 import pandas as pd
 
 import constants
-
-# FutureWarning: The default value of numeric_only in DataFrameGroupBy.sum is deprecated.
-# In a future version, numeric_only will default to False. Either specify numeric_only or
-# select only columns which should be valid for the function.
-#   df = df.resample(f"{aggregation}", label=lbl).sum()
-# warnings.simplefilter(action="ignore", category=FutureWarning)
-
 
 DATABASE = constants.TREND["database"]
 TABLE_MAINS = constants.WIZ_WTR["sql_table"]
