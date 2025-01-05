@@ -72,6 +72,7 @@ class WizWTR_v1:  # pylint: disable=too-many-instance-attributes
         LOGGER.debug(self.list_data)
         LOGGER.debug("*-*")
 
+
     def _translate_telegram(self, telegram) -> dict:
         """Translate the telegram to a dict.
 
@@ -108,7 +109,8 @@ class WizWTR_v1:  # pylint: disable=too-many-instance-attributes
         #      active_liter_lpm=0, total_liter_m3=0.016,
         #      external_devices=None)
 
-        self.water = (telegram.total_liter_m3 + constants.WIZ_WTR["offset"]) * 1000  # in liters
+        self.water = self._calc_new_total(telegram.total_liter_m3) * 1000  # in liters
+
 
         idx_dt: dt.datetime = dt.datetime.now()
         epoch = int(idx_dt.timestamp())
@@ -118,6 +120,14 @@ class WizWTR_v1:  # pylint: disable=too-many-instance-attributes
             "sample_epoch": epoch,
             "water": int(self.water),
         }
+
+    @staticmethod
+    def _calc_new_total(metered_volume: float) -> float:
+        new_volume: float = metered_volume + constants.WIZ_WTR["offset"]
+        for key, value in constants.WIZ_WTR["calibration"].items():
+            if pd.Timestamp(key) < pd.Timestamp.now():
+                new_volume += value
+        return new_volume
 
     def compact_data(self, data) -> tuple:
         """

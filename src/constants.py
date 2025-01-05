@@ -73,6 +73,7 @@ WIZ_WTR: dict = {
     "offset": (891.895 - 0.035),  # m3
     "calibration": {
         "2024-12-25 11:00:00": 0.000,  # correction in m3
+        "2024-01-05 18:31:00": -0.003,
         },
     }
 # fmt: on
