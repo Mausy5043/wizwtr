@@ -20,29 +20,33 @@ if _howip:
 
 
 async def async_work():
-    async with HomeWizardEnergyV1(host=IP_ADDRESS) as api:
-        # blink the LED on the device
-        await api.identify()
+    try:
+        async with HomeWizardEnergyV1(host=IP_ADDRESS) as api:
+            # blink the LED on the device
+            await api.identify()
 
-        wiz_host = api.host  # call function
-        print("\nhost")
-        print(wiz_host, api.host)  # function return-value and class parameter should be same
+            wiz_host = api.host  # call function
+            print("\nhost")
+            print(wiz_host, api.host)  # function return-value and class parameter should be same
 
-        # Get device information, like firmware version
-        wiz_dev = await api.device()
-        print("\ndevice")
-        print(wiz_dev)
+            # Get device information, like firmware version
+            wiz_dev = await api.device()
+            print("\ndevice")
+            print(wiz_dev)
 
-        # Get measurements, like energy or water usage
-        wiz_data = await api.data()
-        print("\ndata")
-        print(wiz_data)
-        print(f"\n{wiz_data.total_liter_m3} m3")
+            # Get measurements, like energy or water usage
+            wiz_data = await api.data()
+            print("\ndata")
+            print(wiz_data)
+            print(f"\n{wiz_data.total_liter_m3} m3")
 
-        wiz_system = await api.system()
-        print("\nsystem")
-        print(wiz_system)
+            wiz_system = await api.system()
+            print("\nsystem")
+            print(wiz_system)
+    except Exception as e:
+        print(f"An error occurred: {e}")
 
 
-asyncio.run(async_work())  # type ignore:[no-untyped-call]
-print("\n\nNORMAL\n\n")
+if __name__ == "__main__":
+    asyncio.run(async_work())  # type: ignore [no-untyped-call]
+    print("\n\nNORMAL\n\n")
