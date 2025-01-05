@@ -72,7 +72,6 @@ class WizWTR_v1:  # pylint: disable=too-many-instance-attributes
         LOGGER.debug(self.list_data)
         LOGGER.debug("*-*")
 
-
     def _translate_telegram(self, telegram) -> dict:
         """Translate the telegram to a dict.
 
@@ -110,7 +109,6 @@ class WizWTR_v1:  # pylint: disable=too-many-instance-attributes
         #      external_devices=None)
 
         self.water = self._calc_new_total(telegram.total_liter_m3) * 1000  # in liters
-
 
         idx_dt: dt.datetime = dt.datetime.now()
         epoch = int(idx_dt.timestamp())
