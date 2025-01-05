@@ -48,5 +48,5 @@ async def async_work():
 
 
 if __name__ == "__main__":
-    asyncio.run(async_work())  # type: ignore [no-untyped-call]
+    asyncio.run(async_work())
     print("\n\nNORMAL\n\n")
