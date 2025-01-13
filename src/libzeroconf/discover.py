@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 
-# lektrix
-# Copyright (C) 2024  Maurice (mausy5043) Hendrix
+# wizwtr
+# Copyright (C) 2025  Maurice (mausy5043) Hendrix
 # AGPL-3.0-or-later  - see LICENSE
 
 """Discover Multi-cast devices that support Homewizard."""
@@ -10,23 +10,28 @@ import json
 import logging
 import logging.handlers
 import os
+import platform
 import sys
-import syslog
 import time
 from typing import Any
 
 from zeroconf import ServiceBrowser, ServiceListener, Zeroconf
 
-logging.basicConfig(
-    level=logging.INFO,
-    format="%(module)s.%(funcName)s [%(levelname)s] - %(message)s",
-    datefmt="%Y-%m-%d %H:%M:%S",
-    handlers=[
+# initialize logging
+is_macos = platform.system() == "Darwin"
+hndlrs: list = []
+if not is_macos:
+    hndlrs = [
         logging.handlers.SysLogHandler(
             address="/dev/log",
             facility=logging.handlers.SysLogHandler.LOG_DAEMON,
         ),
-    ],
+    ]
+logging.basicConfig(
+    level=logging.INFO,
+    format="%(module)s.%(funcName)s [%(levelname)s] - %(message)s",
+    datefmt="%Y-%m-%d %H:%M:%S",
+    handlers=hndlrs,
 )
 LOGGER: logging.Logger = logging.getLogger(__name__)
 
@@ -228,22 +233,10 @@ def get_ip(service: str, filtr: str) -> list[str]:
 
 
 if __name__ == "__main__":
-    # initialise logging
-    syslog.openlog(
-        ident=f'{MYAPP}.{MYID.split(".")[0]}',
-        facility=syslog.LOG_LOCAL0,
-    )
-    # we keep a registry of discovered devices
-    DEBUG = True
+    # initialise logging to console
+    LOGGER.addHandler(logging.StreamHandler(sys.stdout))
+    LOGGER.level = logging.DEBUG
 
-    if DEBUG:
-        # DEBUG = True
-        # print(OPTION)
-        if len(LOGGER.handlers) == 0:
-            LOGGER.addHandler(logging.StreamHandler(sys.stdout))
-        LOGGER.level = logging.DEBUG
-        LOGGER.debug("Debug-mode started.")
-        # print("Use <Ctrl>+C to stop.")
-
+    LOGGER.debug("Debug-mode started.")
     LOGGER.debug(f"IP = {get_ip(service='_hwenergy', filtr='HWE-WTR')}")
     LOGGER.debug("...done")
