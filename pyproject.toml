@@ -11,9 +11,9 @@ dependencies = [
     "matplotlib~=3.10",
     "mausy5043-common==1.12.1",
     "python-homewizard-energy~=7.0",
-    "sh~=2.1",
+    "sh~=2.2",
     "tabulate~=0.9",
-    "zeroconf~=0.136",
+    "zeroconf~=0.139",
     ]
 license = {file = "LICENSE"}
 authors = [
