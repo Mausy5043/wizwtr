@@ -13,7 +13,7 @@ dependencies = [
     "python-homewizard-energy~=7.0",
     "sh~=2.2",
     "tabulate~=0.9",
-    "zeroconf~=0.139",
+    "zeroconf~=0.140",
     ]
 license = {file = "LICENSE"}
 authors = [
