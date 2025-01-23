@@ -9,4 +9,4 @@ mausy5043-common~=1.12
 python-homewizard-energy~=7.0
 sh~=2.2
 tabulate~=0.9
-zeroconf~=0.141
+zeroconf~=0.141.0
