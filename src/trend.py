@@ -11,6 +11,7 @@ Using HomeWizard watermeter data
 import argparse
 import random
 import sqlite3 as s3
+import sys
 import time
 from datetime import datetime as dt
 
@@ -263,6 +264,7 @@ def main(opt) -> None:
 
 
 if __name__ == "__main__":
+    print(f"Trending with Python {sys.version}")
     if OPTION.hours == 0:
         OPTION.hours = 80
     if OPTION.days == 0:
