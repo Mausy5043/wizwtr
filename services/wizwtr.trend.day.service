@@ -8,6 +8,7 @@ Wants=wizwtr.trend.day.timer
 Type=oneshot
 User=pi
 EnvironmentFile=/home/pi/.pyenvpaths
+WorkingDirectory=/home/pi/wizwtr
 ExecStart=/home/pi/wizwtr/src/pastday.sh -
 
 # [Install]
