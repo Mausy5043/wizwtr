@@ -12,6 +12,7 @@
 import datetime as dt
 import logging
 import sys
+import time
 
 import numpy as np
 import pandas as pd
@@ -30,11 +31,18 @@ class WizWTR_v1:  # pylint: disable=too-many-instance-attributes
     """Class to interact with the HomeWizard watermeter."""
 
     def __init__(self, debug: bool = False) -> None:  # pylint: disable=too-many-instance-attributes
+        """Initialize the class."""
         # get a HomeWizard IP
-        _howip = zcd.get_ip(service="_hwenergy", filtr="HWE-WTR")
         self.ip = ""
-        if _howip:
-            self.ip = _howip[0]
+        deltat = 10
+        while not self.ip:
+            _howip = zcd.get_ip(service="_hwenergy", filtr="HWE-WTR")
+            if _howip:
+                self.ip = _howip[0]
+            else:
+                LOGGER.error(f"No HomeWizard WTR found. Retrying in {deltat} seconds.")
+                time.sleep(deltat)
+                deltat *= 1.4142
         self.dt_format = constants.DT_FORMAT  # "%Y-%m-%d %H:%M:%S"
         # starting values
         self.water: float = 0.0
