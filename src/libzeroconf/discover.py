@@ -206,7 +206,7 @@ def get_ip(service: str, filtr: str) -> list[str]:
         list[str]: A list of IP addresses that match the given service and filter.
     """
 
-    _ip = []
+    _ip: list[str] = []
     _zc = Zeroconf()
     _ls = MyListener()
     _service = service
