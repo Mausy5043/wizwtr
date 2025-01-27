@@ -5,7 +5,9 @@ HERE=$(cd "$(dirname "${BASH_SOURCE[0]}")" >/dev/null 2>&1 && pwd)
 pushd "${HERE}" >/dev/null || exit 1
 
 PARENT_COMMAND=$(ps $PPID | tail -n 1 | awk "{print \$5}")
-echo "*** wizwtr caller: ${PARENT_COMMAND}"
+echo "*** wizwtr caller : ${PARENT_COMMAND}"
+echo "*** calling from  : ${HERE}  / = $(pwd)"
+echo "*** using Python  : $(pyenv which python)"
 
 # shellcheck disable=SC1091
 source ./src/include.sh
