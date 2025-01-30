@@ -35,7 +35,7 @@ async def async_work():
             print(wiz_dev)
 
             # Get measurements, like energy or water usage
-            wiz_data = await api.data()
+            wiz_data = await api.measurement()
             print("\ndata")
             print(wiz_data)
             print(f"\n{wiz_data.total_liter_m3} m3")
