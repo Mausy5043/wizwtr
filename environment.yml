@@ -16,7 +16,7 @@ dependencies:
   - pip:
       - gracefulkiller~=0.4
       - mausy5043-common~=1.12
-      - python-homewizard-energy~=7.0
+      - python-homewizard-energy==8.3.0  # many breaking changes expected
   - matplotlib=3.10
   - sh=2.2
   - tabulate=0.9

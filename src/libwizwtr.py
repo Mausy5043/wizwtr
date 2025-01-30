@@ -35,7 +35,7 @@ class WizWTR_v1:  # pylint: disable=too-many-instance-attributes
         # get a HomeWizard IP
         self.ip = ""
         deltat = 10
-        while not self.ip and deltat<300:
+        while not self.ip and deltat < 300:
             _howip = zcd.get_ip(service="_hwenergy", filtr="HWE-WTR")
             if _howip:
                 self.ip = _howip[0]
@@ -73,7 +73,7 @@ class WizWTR_v1:  # pylint: disable=too-many-instance-attributes
                 self.firstcall = False
 
             # Get measurements
-            wiz_data = await _api.data()
+            wiz_data = await _api.measurement()
             LOGGER.debug(wiz_data)
             LOGGER.debug("---")
 
