@@ -34,7 +34,7 @@ class WizWTR_v1:  # pylint: disable=too-many-instance-attributes
         """Initialize the class."""
         # get a HomeWizard IP
         self.ip = ""
-        deltat = 10
+        deltat = 10.0
         while not self.ip and deltat < 300:
             _howip = zcd.get_ip(service="_hwenergy", filtr="HWE-WTR")
             if _howip:
