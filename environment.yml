@@ -19,6 +19,7 @@ dependencies:
       # many breaking changes expected
       - python-homewizard-energy==8.3.0
   - matplotlib=3.10
+  - pytz
   - sh=2.2
   - tabulate=0.9
   - zeroconf=0.145.1

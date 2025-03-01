@@ -12,6 +12,7 @@ dependencies = [
     "mausy5043-common~=2.1",
     # many breaking changes expected
     "python-homewizard-energy==8.3.0",
+    "pytz",
     "sh~=2.2",
     "tabulate~=0.9",
     "zeroconf~=0.145.1",
