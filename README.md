@@ -5,6 +5,5 @@
 [![pre-commit.ci status](https://results.pre-commit.ci/badge/github/Mausy5043/wizwtr/master.svg)](https://results.pre-commit.ci/latest/github/Mausy5043/wizwtr/master)
 [![Dependabot Updates](https://github.com/Mausy5043/wizwtr/actions/workflows/dependabot/dependabot-updates/badge.svg)](https://github.com/Mausy5043/wizwtr/actions/workflows/dependabot/dependabot-updates)
 
-
 # wizwtr
 HomeWizard Water meter data gatherer
