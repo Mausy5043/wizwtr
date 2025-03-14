@@ -17,14 +17,11 @@ import time
 import numpy as np
 import pandas as pd
 from homewizard_energy import HomeWizardEnergyV1
+from mausy5043_common import funzeroconf as zcd
 
 import constants
-from libzeroconf import discover as zcd
 
 LOGGER: logging.Logger = logging.getLogger(__name__)
-
-
-# https://api-documentation.homewizard.com/docs/category/api-v1
 
 
 class WizWTR_v1:  # pylint: disable=too-many-instance-attributes
