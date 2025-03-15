@@ -36,8 +36,9 @@ class WizWTR_v1:  # pylint: disable=too-many-instance-attributes
             _howip = zcd.get_ip(service="_hwenergy", filtr="HWE-WTR")
             if _howip:
                 self.ip = _howip[0]
+                LOGGER.info(f"HomeWizard watermeter found at IP: {self.ip}")
             else:
-                LOGGER.error(f"No HomeWizard WTR found. Retrying in {deltat} seconds.")
+                LOGGER.error(f"No HomeWizard watermeter found. Retrying in {deltat} seconds.")
                 time.sleep(deltat)
                 deltat = int(deltat * 14.142) / 10
 
