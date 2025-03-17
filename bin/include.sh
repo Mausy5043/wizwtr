@@ -95,11 +95,11 @@ graph_wizwtr() {
     ROOT_DIR=$1
 
     echo "Creating graphs [1]"
-    . "${ROOT_DIR}/src/pastday.sh"
+    . "${ROOT_DIR}/bin/pastday.sh"
     echo "Creating graphs [2]"
-    . "${ROOT_DIR}/src/pastmonth.sh"
+    . "${ROOT_DIR}/bin/pastmonth.sh"
     echo "Creating graphs [3]"
-    . "${ROOT_DIR}/src/pastyear.sh"
+    . "${ROOT_DIR}/bin/pastyear.sh"
 }
 
 # stop, update the repo and start the application
