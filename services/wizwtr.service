@@ -10,7 +10,7 @@ User=pi
 EnvironmentFile=/home/pi/.pyenvpaths
 WorkingDirectory=/home/pi/wizwtr
 ExecStartPre=/home/pi/wizwtr/wizwtr --boot
-ExecStart=/home/pi/wizwtr/src/wizwtr.py --start
+ExecStart=/home/pi/wizwtr/bin/wizwtr.py --start
 # stand back for 1 minute to allow for dongle to recover
 RestartSec=60s
 Restart=on-failure

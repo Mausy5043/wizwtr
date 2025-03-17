@@ -9,7 +9,7 @@ Type=oneshot
 User=pi
 EnvironmentFile=/home/pi/.pyenvpaths
 WorkingDirectory=/home/pi/wizwtr
-ExecStart=/home/pi/wizwtr/src/pastmonth.sh -
+ExecStart=/home/pi/wizwtr/bin/pastmonth.sh -
 
 # [Install]
 # WantedBy=multi-user.target
