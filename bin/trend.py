@@ -15,11 +15,10 @@ import sys
 import time
 from datetime import datetime as dt
 
+import constants
 import matplotlib.pyplot as plt
 import matplotlib.ticker as mticker
 import pandas as pd
-
-import constants
 
 DATABASE = constants.TREND["database"]
 TABLE_MAINS = constants.WIZ_WTR["sql_table"]
