@@ -7,7 +7,7 @@ gracefulkiller~=0.4
 matplotlib~=3.10
 mausy5043-common~=2.2
 # many breaking changes expected
-python-homewizard-energy==8.3.0
+python-homewizard-energy==8.3.2
 pytz
 sh~=2.2
 tabulate~=0.9
