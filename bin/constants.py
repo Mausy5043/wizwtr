@@ -78,7 +78,7 @@ WIZ_WTR: dict = {
         "2025-01-05 18:31:00": -0.003,
         "2025-03-01 08:25:00": -0.005,
     },
-    "config": f"{_MYHOME}/.config/wizwtr/homewizard/config.json",
+    "config": f"{_MYHOME}/.config/homewizard/wtr.json",
     }
 # fmt: on
 
