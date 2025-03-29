@@ -14,7 +14,7 @@ import logging
 import sys
 import time
 
-import constants
+import constants as cs
 import numpy as np
 import pandas as pd
 from homewizard_energy import HomeWizardEnergyV1
@@ -42,6 +42,7 @@ class WizWTR_v1:  # pylint: disable=too-many-instance-attributes
                 deltat = int(deltat * 14.142) / 10
 
         self.dt_format = constants.DT_FORMAT  # "%Y-%m-%d %H:%M:%S"
+        self.dt_format = cs.DT_FORMAT
         # starting values
         self.water: float = 0.0
         self.list_data: list = []
@@ -127,8 +128,8 @@ class WizWTR_v1:  # pylint: disable=too-many-instance-attributes
 
     @staticmethod
     def _calc_new_total(metered_volume: float) -> float:
-        new_volume: float = metered_volume + constants.WIZ_WTR["offset"]
-        for key, value in constants.WIZ_WTR["calibration"].items():
+        new_volume: float = metered_volume + cs.WIZ_WTR["offset"]
+        for key, value in cs.WIZ_WTR["calibration"].items():
             if pd.Timestamp(key) < pd.Timestamp.now():
                 new_volume += value
         return new_volume
@@ -148,11 +149,11 @@ class WizWTR_v1:  # pylint: disable=too-many-instance-attributes
             return int(pd.Timestamp(date_to_convert).timestamp())
 
         def _convert_time_to_text(date_to_convert) -> str:
-            return str(pd.Timestamp(date_to_convert).strftime(constants.DT_FORMAT))
+            return str(pd.Timestamp(date_to_convert).strftime(cs.DT_FORMAT))
 
         df = pd.DataFrame(data)
         df = df.set_index("sample_time")
-        df.index = pd.to_datetime(df.index, format=constants.DT_FORMAT, utc=False)
+        df.index = pd.to_datetime(df.index, format=cs.DT_FORMAT, utc=False)
         # resample to monotonic timeline
         df_out = df.resample("15min", label="right").max()
         # df_mean = df.resample("15min", label="right").mean()
