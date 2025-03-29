@@ -12,7 +12,7 @@
 import datetime as dt
 import logging
 import sys
-import time
+import json
 
 import constants as cs
 import numpy as np
@@ -40,7 +40,11 @@ class WizWTR_v1:  # pylint: disable=too-many-instance-attributes
                 LOGGER.addHandler(logging.StreamHandler(sys.stdout))
             LOGGER.level = logging.DEBUG
             LOGGER.debug("Debugging on.")
-            self.telegram: list = []
+        # process config file
+        with open(cs.WIZ_WTR["config_file"], encoding="utf-8") as _json_file:
+            _cfg = json.load(_json_file)
+        self.serial: str = _cfg["serial"]
+        self.token: str = _cfg["token"]
 
         self.hwe = hwz.MyHomeWizard(serial=self.serial, token=self.token, debug=self.debug)
         self.hwe.connect()
