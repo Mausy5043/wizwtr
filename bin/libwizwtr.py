@@ -112,7 +112,7 @@ class WizWTR:
         return new_volume
 
     @staticmethod
-    def compact_data(self, data) -> tuple:
+    def compact_data(data) -> tuple:
         """
         Compact the data into 15-minute data
 
