@@ -67,10 +67,6 @@ def main() -> None:
     set_led("mains", "orange")
     killer = gk.GracefulKiller()
     API_wtr = wtr.WizWTR(debug=DEBUG)
-    if not API_wtr.ip:
-        LOGGER.critical("No HomeWizard watermeter found.")
-        set_led("mains", "red")
-        sys.exit(1)
 
     sql_db = m3.SqlDatabase(
         database=cs.WIZ_WTR["database"],
