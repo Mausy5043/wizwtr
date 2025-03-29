@@ -4,7 +4,7 @@
 # Copyright (C) 2025  Maurice (mausy5043) Hendrix
 # AGPL-3.0-or-later  - see LICENSE
 
-# https://api-documentation.homewizard.com/docs/category/api-v1
+"""Common functions for use with the HomeWizard watermeter"""
 
 import datetime as dt
 import logging
@@ -19,20 +19,18 @@ from mausy5043_common import funhomewizard as hwz
 LOGGER: logging.Logger = logging.getLogger(__name__)
 
 
-class WizWTR_v1:  # pylint: disable=too-many-instance-attributes
+class WizWTR:
     """Class to interact with the HomeWizard watermeter."""
 
-    def __init__(self, debug: bool = False) -> None:  # pylint: disable=too-many-instance-attributes
+    def __init__(self, debug: bool = False) -> None:
         """Initialize the class."""
         self.debug: bool = debug
         self.dt_format = cs.DT_FORMAT
         # starting values
         self.water: float = 0.0
         self.list_data: list = []
-
-        self.debug: bool = debug
-        self.firstcall = True
-        if debug:
+        # set-up logging
+        if self.debug:
             if len(LOGGER.handlers) == 0:
                 LOGGER.addHandler(logging.StreamHandler(sys.stdout))
             LOGGER.level = logging.DEBUG
@@ -50,7 +48,7 @@ class WizWTR_v1:  # pylint: disable=too-many-instance-attributes
         """Fetch data from the device.
 
         Returns:
-            (bool): valid telegram received True or False
+            Nothing
         """
         _wiz_data = self.hwe.get_measurement()
 
@@ -69,7 +67,7 @@ class WizWTR_v1:  # pylint: disable=too-many-instance-attributes
 
         # telegram will look something like this (we only use water data at the end):
         #
-        # Data(wifi_ssid='niflheim', wifi_strength=100, smr_version=None,
+        # Data(wifi_ssid='ssid', wifi_strength=100, smr_version=None,
         #      meter_model=None, unique_meter_id=None, active_tariff=None,
         #      total_energy_import_kwh=None, total_energy_import_t1_kwh=None,
         #      total_energy_import_t2_kwh=None, total_energy_import_t3_kwh=None,
