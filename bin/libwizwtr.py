@@ -6,9 +6,6 @@
 
 # https://api-documentation.homewizard.com/docs/category/api-v1
 
-"""Common functions for use with the HomeWizard watermeter using the API/v1"""
-
-# import asyncio
 import datetime as dt
 import logging
 import sys
@@ -57,12 +54,7 @@ class WizWTR_v1:  # pylint: disable=too-many-instance-attributes
         """
         _wiz_data = self.hwe.get_measurement()
 
-            # Get measurements
-            wiz_data = await _api.measurement()
-            LOGGER.debug(wiz_data)
-            LOGGER.debug("---")
-
-        self.list_data.append(self._translate_telegram(wiz_data))
+        self.list_data.append(self._translate_telegram(_wiz_data))
         LOGGER.debug(self.list_data)
         LOGGER.debug("*-*")
 
