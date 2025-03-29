@@ -1,6 +1,6 @@
 # when changing this file also consider `pyproject.toml` and `requirements.txt`
 # Usage:
-# conda -v env update --file environment.yml; pre-commit run --all-files; pycheck
+# conda -v env update --file=environment.yml; pre-commit run --all-files; pycheck
 
 name: wizwtr
 channels:
@@ -15,9 +15,9 @@ dependencies:
   # Not on conda channels:
   - pip:
       - gracefulkiller~=0.4
-      - mausy5043-common~=2.2
+      - mausy5043-common>=2.2.4
       # many breaking changes expected
-      - python-homewizard-energy==8.3.2
+      - python-homewizard-energy==9.0.0
   - matplotlib=3.10
   - pytz
   - sh=2.2
