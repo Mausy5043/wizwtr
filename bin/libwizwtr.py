@@ -36,7 +36,7 @@ class WizWTR:
             LOGGER.level = logging.DEBUG
             LOGGER.debug("Debugging on.")
         # process config file
-        with open(cs.WIZ_WTR["config_file"], encoding="utf-8") as _json_file:
+        with open(cs.WIZ_WTR["config"], encoding="utf-8") as _json_file:
             _cfg = json.load(_json_file)
         self.serial: str = _cfg["serial"]
         self.token: str = _cfg["token"]
