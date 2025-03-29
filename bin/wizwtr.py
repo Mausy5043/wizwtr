@@ -19,7 +19,7 @@ import syslog
 import time
 import traceback
 
-import constants
+import constants as cs
 import GracefulKiller as gk  # type: ignore[import-untyped]
 import libwizwtr as wtr
 import mausy5043_common.libsqlite3 as m3
@@ -74,14 +74,14 @@ def main() -> None:
         sys.exit(1)
 
     sql_db = m3.SqlDatabase(
-        database=constants.WIZ_WTR["database"],
-        table=constants.WIZ_WTR["sql_table"],
-        insert=constants.WIZ_WTR["sql_command"],
+        database=cs.WIZ_WTR["database"],
+        table=cs.WIZ_WTR["sql_table"],
+        insert=cs.WIZ_WTR["sql_command"],
         debug=DEBUG,
     )
 
-    report_interval = int(constants.WIZ_WTR["report_interval"])
-    sample_interval = report_interval / int(constants.WIZ_WTR["samplespercycle"])
+    report_interval = int(cs.WIZ_WTR["report_interval"])
+    sample_interval = report_interval / int(cs.WIZ_WTR["samplespercycle"])
 
     next_time = time.time()
     rprt_time = time.time() + (report_interval - (time.time() % report_interval))
@@ -139,7 +139,7 @@ def set_led(dev, colour) -> None:
     LOGGER.debug(f"{dev} is {colour}")
 
     in_dirfile = f"{APPROOT}/www/{colour}.png"
-    out_dirfile = f'{constants.TREND["website"]}/{dev}.png'
+    out_dirfile = f'{cs.TREND["website"]}/{dev}.png'
     shutil.copy(f"{in_dirfile}", out_dirfile)
 
 
