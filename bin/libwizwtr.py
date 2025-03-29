@@ -17,8 +17,7 @@ import time
 import constants as cs
 import numpy as np
 import pandas as pd
-from homewizard_energy import HomeWizardEnergyV1
-from mausy5043_common import funzeroconf as zcd
+from mausy5043_common import funhomewizard as hwz
 
 LOGGER: logging.Logger = logging.getLogger(__name__)
 
@@ -28,20 +27,7 @@ class WizWTR_v1:  # pylint: disable=too-many-instance-attributes
 
     def __init__(self, debug: bool = False) -> None:  # pylint: disable=too-many-instance-attributes
         """Initialize the class."""
-        # get a HomeWizard IP
-        self.ip = ""
-        deltat = 10.0
-        while not self.ip and deltat < 300:
-            _howip = zcd.get_ip(service="_hwenergy", filtr="HWE-WTR")
-            if _howip:
-                self.ip = _howip[0]
-                LOGGER.info(f"HomeWizard watermeter found at IP: {self.ip}")
-            else:
-                LOGGER.error(f"No HomeWizard watermeter found. Retrying in {deltat} seconds.")
-                time.sleep(deltat)
-                deltat = int(deltat * 14.142) / 10
-
-        self.dt_format = constants.DT_FORMAT  # "%Y-%m-%d %H:%M:%S"
+        self.debug: bool = debug
         self.dt_format = cs.DT_FORMAT
         # starting values
         self.water: float = 0.0
@@ -56,19 +42,16 @@ class WizWTR_v1:  # pylint: disable=too-many-instance-attributes
             LOGGER.debug("Debugging on.")
             self.telegram: list = []
 
-    async def get_telegram(self):
-        """Fetch a telegram from the serialport.
+        self.hwe = hwz.MyHomeWizard(serial=self.serial, token=self.token, debug=self.debug)
+        self.hwe.connect()
+
+    def get_telegram(self) -> None:
+        """Fetch data from the device.
 
         Returns:
             (bool): valid telegram received True or False
         """
-        async with HomeWizardEnergyV1(host=self.ip) as _api:
-            if self.debug and self.firstcall:
-                # Get device information, like firmware version
-                wiz_dev = await _api.device()
-                LOGGER.debug(wiz_dev)
-                LOGGER.debug("")
-                self.firstcall = False
+        _wiz_data = self.hwe.get_measurement()
 
             # Get measurements
             wiz_data = await _api.measurement()
