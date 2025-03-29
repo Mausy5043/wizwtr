@@ -10,7 +10,6 @@ Store the data in a SQLite3 database.
 """
 
 import argparse
-import asyncio
 import logging.handlers
 import os
 import shutil
@@ -67,7 +66,7 @@ def main() -> None:
     LOGGER.info(f"Running on Python {sys.version}")
     set_led("mains", "orange")
     killer = gk.GracefulKiller()
-    API_wtr = wtr.WizWTR_v1(debug=DEBUG)
+    API_wtr = wtr.WizWTR(debug=DEBUG)
     if not API_wtr.ip:
         LOGGER.critical("No HomeWizard watermeter found.")
         set_led("mains", "red")
@@ -90,7 +89,7 @@ def main() -> None:
             start_time = time.time()
             try:
                 LOGGER.debug("\n...requesting telegram")
-                asyncio.run(API_wtr.get_telegram())
+                API_wtr.get_telegram()
                 set_led("mains", "green")
             except Exception:  # noqa
                 set_led("mains", "red")
