@@ -7,9 +7,9 @@
 """Common functions for use with the HomeWizard watermeter"""
 
 import datetime as dt
+import json
 import logging
 import sys
-import json
 
 import constants as cs
 import numpy as np
