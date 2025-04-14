@@ -20,7 +20,7 @@ dependencies:
   - pytz
   - sh=2.2
   - tabulate=0.9
-  - zeroconf=0.146.1
+  - zeroconf=0.146.4
 
   # dev deps
   - jupyterlab
