@@ -1,3 +1,5 @@
+![StaticBadge](https://img.shields.io/badge/support-ON_HOLD-orange)
+
 [![License](https://img.shields.io/github/license/mausy5043/wizwtr)](LICENSE)
 ![Static Badge](https://img.shields.io/badge/release-rolling-lightgreen)
 [![Code style: ruff](https://img.shields.io/badge/code%20style-ruff-008800.svg)](https://github.com/astral-sh/ruff)
