@@ -9,4 +9,4 @@ mausy5043-common>=2.2.5
 pytz
 sh~=2.2
 tabulate~=0.9
-zeroconf~=0.147.2
+zeroconf~=0.148.0
